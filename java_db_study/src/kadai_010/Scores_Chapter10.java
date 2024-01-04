@@ -20,7 +20,7 @@ public class Scores_Chapter10 {
 					"qL2&R6#PVN"
 					);
 			statement = con.createStatement();
-			System.out.println("データベース接続成功");
+			System.out.println("データベース接続成功:"+con);
 			String sql1 ="UPDATE scores SET score_math = 95, score_english =80 WHERE id = 5";
 			int rowCnt = statement.executeUpdate(sql1);
 			System.out.println(rowCnt+"件のレコードが更新されました");
