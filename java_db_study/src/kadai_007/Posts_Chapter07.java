@@ -58,7 +58,7 @@ public class Posts_Chapter07 {
 				try {statement.close();} catch(SQLException ignore) {}
 			} 
 			if(con != null) {
-				try {statement.close();} catch(SQLException ignore) {}
+				try {con.close();} catch(SQLException ignore) {}
 			}
 		}
 	}
