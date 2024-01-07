@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class Posts_Chapter07 {
 
@@ -28,7 +29,7 @@ public class Posts_Chapter07 {
 					);
 			System.out.println("データベース接続成功:jdbc:mysql://localhost/challenge_java");
 			//レコードの追加
-			String sql1 ="INSERT INTO posts (user_id, posted_at, post_content, likes) VALUES ( ?, ?, ?, ?)";
+			String sql1 ="INSERT INTO posts (user_id, posted_at, post_content, likes) VALUES ( ?, ?, ?, ?);";
 			statement = con.prepareStatement(sql1);
 			int rowCnt =0;
 			System.out.println("レコード追加を実行します");
@@ -39,15 +40,16 @@ public class Posts_Chapter07 {
 				statement.setString(4, postList[i][3]);
 				rowCnt =statement.executeUpdate();
 			}
-			System.out.println(postList.length + "件のレコードが追加されました");
+			System.out.println( postList.length + "件のレコードが追加されました");
 			//レコードを検索
-			String sql2 ="SELECT * FROM posts WHERE user_id=1002";
+			System.out.println("ユーザーIDが1002のレコードを検索しました");
+			String sql2 ="SELECT * FROM posts WHERE user_id=1002;";
 			ResultSet result = statement.executeQuery(sql2);
 			while(result.next()) {
-				String posted_at = result.getString("posted_at");
+				Date postedAt = result.getDate("posted_at");
 				String post_content = result.getString("post_content");
 				int likes = result.getInt("likes");
-				System.out.println(result.getRow()+"件目：投稿日時="+posted_at+"／投稿内容="+post_content+"／いいね数＝"+likes);
+				System.out.println(result.getRow()+"件目：投稿日時="+postedAt+"／投稿内容="+post_content+"／いいね数＝"+likes);
 			}
 		} catch(SQLException e) {
 			System.out.println("エラー発生:"+e.getMessage());
